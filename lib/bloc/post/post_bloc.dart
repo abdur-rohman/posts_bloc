@@ -11,7 +11,9 @@ class PostBloc extends Bloc<GetPostsEvent, PostState> {
 
   @override
   Stream<PostState> mapEventToState(GetPostsEvent event) async* {
-    yield PostLoadingState();
+    if (state is! PostLoadingState) {
+      yield PostLoadingState();
+    }
 
     try {
       // https://jsonplaceholder.typicode.com/posts
